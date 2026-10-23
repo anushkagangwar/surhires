@@ -87,7 +87,7 @@ npm install
 npm run dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open https://vercel.com/anushka-d683/surhires-md4n in your browser.
 
 ### Production Build
 
