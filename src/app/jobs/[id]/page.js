@@ -147,15 +147,27 @@ const jobsData = [
   },
 ];
 
-export function generateMetadata({ params }) {
-  return params.then(({ id }) => {
-    const job = jobsData.find((item) => item.id === Number(id));
+export function generateStaticParams() {
+  return jobsData.map((job) => ({
+    id: String(job.id),
+  }));
+}
 
-    return {
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const job = jobsData.find((item) => item.id === Number(id));
+
+  return {
+    title: job ? `${job.title} at ${job.company}` : "Job Not Found",
+    description:
+      job?.description || "Explore career opportunities on Surhires.",
+    openGraph: {
       title: job ? `${job.title} at ${job.company}` : "Job Not Found",
-      description: job?.description || "Explore career opportunities on Surhires.",
-    };
-  });
+      description:
+        job?.description || "Explore career opportunities on Surhires.",
+      type: "website",
+    },
+  };
 }
 
 export default async function JobDetailsPage({ params }) {
@@ -177,6 +189,7 @@ export default async function JobDetailsPage({ params }) {
             <div
               className="job-detail-logo"
               style={{ backgroundColor: job.color }}
+              aria-hidden="true"
             >
               {job.initials}
             </div>
@@ -218,7 +231,7 @@ export default async function JobDetailsPage({ params }) {
             <ul className="job-detail-responsibilities">
               {job.responsibilities.map((item) => (
                 <li key={item}>
-                  <CheckCircle2 size={18} />
+                  <CheckCircle2 size={18} aria-hidden="true" />
                   <span>{item}</span>
                 </li>
               ))}
