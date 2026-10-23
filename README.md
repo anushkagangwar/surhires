@@ -87,7 +87,7 @@ npm install
 npm run dev
 ```
 
-5. Open https://vercel.com/anushka-d683/surhires-md4n in your browser.
+5. Open https://surhires-md4n-git-main-anushka-d683.vercel.app/ in your browser.
 
 ### Production Build
 
